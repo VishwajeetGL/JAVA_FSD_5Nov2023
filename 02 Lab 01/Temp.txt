@@ -1,0 +1,159 @@
+
+--------------
+
+package com.greatlearning.javafsd.emailapp.model;
+
+public class Employee {
+
+    private String firstName;
+    private String lastName;
+    
+    private String department;	
+    private String emailAddress;
+    private String password;
+    
+        
+    public Employee(String firstName, String lastName) {
+        
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+    public String getDepartment() {
+        return department;
+    }
+
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+
+
+---------------------------------
+
+package com.greatlearning.javafsd.emailapp.service;
+
+import java.util.Random;
+
+public class PasswordGenerator {
+
+    public String generate() {
+            
+        String capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String smallLetters = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+        String specialCharacters = "~!@#$%^&*()-;+[]|";
+        
+        String combinedString = 
+            capitalLetters + smallLetters + numbers
+                + specialCharacters;
+            
+        Random randomObj = new Random();
+        
+        StringBuilder passwordBuilder = new StringBuilder();
+        
+        int length = combinedString.length();
+                
+        //8 character password
+        
+        for (int index = 1; index <= 8; index ++) {
+            
+            int randomIndex = randomObj.nextInt(length);
+            
+            char charValue = 
+                    combinedString.charAt(randomIndex);			
+            
+            passwordBuilder.append(charValue);						
+        }
+        
+        String password = passwordBuilder.toString();
+        
+        return password;
+    }
+}
+
+
+------------------------------------------
+
+package com.greatlearning.javafsd.emailapp.service;
+
+public class PasswordGeneratorTest {
+
+    public static void main(String[] args) {
+        
+        
+		testRun01();
+        
+        testRun02();
+        
+    }
+    
+    static void testRun01() {
+        
+        PasswordGenerator generator = new PasswordGenerator();
+        
+        String password = generator.generate();
+    
+        System.out.println("Generated password -> " + password);
+        
+    }
+    
+    static void testRun02() {
+        
+        
+        for (int index = 1; index <=10; index ++ ) {
+
+            PasswordGenerator generator = new PasswordGenerator();
+
+            String password = generator.generate();
+            
+            System.out.println("Generated password -> " + password);			
+        }
+        
+        
+    }
+}    
+
+----------------------------
